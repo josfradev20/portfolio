@@ -1,13 +1,15 @@
 'use client'
-import Link from 'next/link'
 import { clsx } from 'clsx'
+import Link from 'next/link'
 import { MdClose } from 'react-icons/md'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useHash } from '@/hooks/useHash'
 
 export const Header = () => {
   const { open, reference, setOpen } = useOutsideClick()
+  const hash = useHash()
 
   const navClasses = clsx(
     'absolute top-full left-0 w-full py-6 px-4 bg-slate-900 border-t-2 border-t-[#00000033] shadow-md shadow-[#00000033] md:inline-flex md:items-center md:static md:w-auto md:p-0 md:border-t-0 md:shadow-none md:gap-4',
@@ -36,6 +38,8 @@ export const Header = () => {
       href: '#contact'
     }
   ]
+
+  console.log('HASH', hash)
 
   return (
     <header className="sticky top-0 z-50 bg-slate-900">

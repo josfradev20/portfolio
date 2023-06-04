@@ -1,25 +1,21 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useHash = () => {
-  const [hash, setHash] = useState(() => window.location.hash)
-
-  const hashChangeHandler = useCallback(() => {
-    setHash(window.location.hash)
-  }, [])
+  const [hash, setHash] = useState(() => {
+    return typeof window !== 'undefined' ? window.location.hash : ''
+  })
 
   useEffect(() => {
-    window.addEventListener('hashchange', hashChangeHandler)
+    const handleHashChange = () => {
+      setHash(window.location.hash)
+    }
+
+    window.addEventListener('hashchange', handleHashChange, true)
+
     return () => {
-      window.removeEventListener('hashchange', hashChangeHandler)
+      window.removeEventListener('hashchange', handleHashChange, true)
     }
   }, [])
 
-  const updateHash = useCallback(
-    newHash => {
-      if (newHash !== hash) window.location.hash = newHash
-    },
-    [hash]
-  )
-
-  return [hash, updateHash]
+  return hash
 }
