@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export const useHash = () => {
+  const router = useRouter()
   const [hash, setHash] = useState(() => {
     return typeof window !== 'undefined' ? window.location.hash : ''
   })
@@ -10,12 +12,12 @@ export const useHash = () => {
       setHash(window.location.hash)
     }
 
-    window.addEventListener('hashchange', handleHashChange, true)
+    router.events.on('hashChangeComplete', handleHashChange)
 
     return () => {
-      window.removeEventListener('hashchange', handleHashChange, true)
+      router.events.off('hashChangeComplete', handleHashChange)
     }
-  }, [])
+  }, [router])
 
   return hash
 }
