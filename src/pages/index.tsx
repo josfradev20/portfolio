@@ -1,9 +1,10 @@
 import { MainLayout } from '@/Layouts/MainLayout'
+import { HomeSection } from '@/components/templates/HomeSection'
 
 export default function HomePage() {
   return (
     <MainLayout>
-      <h1>Home Page rkfmjrfjt</h1>
+      <HomeSection />
     </MainLayout>
   )
 }

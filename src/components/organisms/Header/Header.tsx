@@ -22,11 +22,11 @@ export const Header = () => {
         className="container mx-auto py-6 px-4 flex justify-between items-center"
         ref={reference}
       >
-        <Link href="/" className="text-2xl font-semibold">
+        <Link href="/" className="text-[2.5rem] font-semibold cursor-default">
           Portafolio.
         </Link>
         <div
-          className="md:hidden text-2xl text-white"
+          className="md:hidden text-5xl text-white"
           onClick={() => setOpen(!open)}
         >
           {open ? <MdClose /> : <GiHamburgerMenu />}

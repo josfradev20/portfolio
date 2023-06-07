@@ -1,37 +1,24 @@
 import Link from 'next/link'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { useHash } from '@/hooks/useHash'
+import { navbarItems } from '@/utils/constants'
 import { getNavLinkClass, getNavbarClass } from './navbar.styles'
 
 export const Navbar = ({ open }: { open: boolean }) => {
+  const router = useRouter()
   const hash = useHash()
 
-  const items = [
-    {
-      name: 'Inicio',
-      href: '#home'
-    },
-    {
-      name: 'Sobre mí',
-      href: '#about'
-    },
-    {
-      name: 'Servicios',
-      href: '#services'
-    },
-    {
-      name: 'Proyectos',
-      href: '#projects'
-    },
-    {
-      name: 'Contacto',
-      href: '#contact'
+  useEffect(() => {
+    if (router.asPath === '/') {
+      router.push('/#home')
     }
-  ]
+  }, [])
 
   return (
     <nav className={getNavbarClass(open)}>
-      {items.map((item, index) => (
+      {navbarItems.map((item, index) => (
         <Link
           key={index}
           href={item.href}
